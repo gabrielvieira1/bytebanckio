@@ -1,30 +1,33 @@
-﻿using System.Text;
-
-var arquivo = "C:\\Users\\Biel\\Documents\\workspaces\\vs\\ByteBanckIO\\contas.txt";
-
-var fluxoDoArquivo = new FileStream(arquivo, FileMode.Open);
-
-var buffer = new byte[1024];
-
-var quantidadeBytesLidos = -1;
-
-while (quantidadeBytesLidos != 0)
+﻿partial class Program
 {
-  quantidadeBytesLidos = fluxoDoArquivo.Read(buffer, 0, 1024);
-  EscreverBuffer(buffer);
+  static void Main(string[] args)
+  {
+    //LidandoComFileStreamDiretamente();
+
+    var enderecoDoArquivo = "C:\\Users\\Biel\\Documents\\workspaces\\vs\\ByteBanckIO\\contas.txt";
+
+    using (var fluxoDoArquivo = new FileStream(enderecoDoArquivo, FileMode.Open))
+    {
+      var leitor = new StreamReader(fluxoDoArquivo);
+
+      //var linha = leitor.ReadLine();
+
+      //var texto = leitor.ReadToEnd();
+
+      //var numero = leitor.Read();
+
+      //Console.WriteLine(linha);
+      //Console.WriteLine(texto);
+      //Console.WriteLine(numero);
+
+      while (!leitor.EndOfStream)
+      {
+        var linha = leitor.ReadLine();
+        Console.WriteLine(linha);
+      }
+    }
+    Console.ReadLine();
+  }
 }
 
 
-static void EscreverBuffer(byte[] buffer)
-{
-  var encoding = new UTF8Encoding();
-  var texto = encoding.GetString(buffer);
-
-  Console.Write(texto);
-
-  //foreach (var meuByte in buffer)
-  //{
-  //  Console.Write(meuByte);
-  //  Console.Write(" ");
-  //}
-}
