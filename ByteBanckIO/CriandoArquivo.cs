@@ -7,7 +7,8 @@ partial class Program
   static void CriandoArquivo()
   {
     //CriarArquivo();
-    CriarArquivoComWriter();
+    //CriarArquivoComWriter();
+    TestaEscrita();
     Console.ReadLine();
   }
   static void CriarArquivo()
@@ -33,6 +34,23 @@ partial class Program
     using (var escritor = new StreamWriter(fluxoDeArquivo))
     {
       escritor.Write("456,65465,456.0,Pedro Vieira");
+    }
+  }
+  static void TestaEscrita()
+  {
+    var caminhoNovoArquivo = "C:\\Users\\Biel\\Documents\\workspaces\\vs\\ByteBanckIO\\teste.txt";
+
+    using (var fluxoDeArquivo = new FileStream(caminhoNovoArquivo, FileMode.Create))
+    using (var escritor = new StreamWriter(fluxoDeArquivo))
+    {
+      for (int i = 0; i < 1000000; i++)
+      {
+        escritor.WriteLine($"Linha {i}");
+        escritor.Flush(); //Despeja o buffer para o Stream
+
+        Console.WriteLine($"Linha {i} foi escrita no arquivo. Tecle enter...");
+        Console.ReadLine();
+      }
     }
   }
 }

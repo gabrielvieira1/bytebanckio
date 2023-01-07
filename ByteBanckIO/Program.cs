@@ -8,7 +8,8 @@ partial class Program
   {
     //LidandoComFileStreamDiretamente();
     //UsandoStreamReader();
-    CriandoArquivo();
+    //CriandoArquivo();
+    StreamBinary();
   }
 }
 
